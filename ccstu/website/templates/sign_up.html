@@ -1,0 +1,198 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="google-signin-client_id" content="1050087304681-48meljgmsmkchmk4kdpgq8f36ok2qfm1.apps.googleusercontent.com">
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+            crossorigin="anonymous"
+        />
+        <link href='https://fonts.googleapis.com/css?family=Kanit' rel='stylesheet'>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="icon" href="{{ url_for('static', filename='logo-project-icon.png') }}" type="image/x-icon">
+
+        <title>{% block title %}CCS | Sign Up{% endblock %}</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                font-family: 'Kanit';
+                background-color: #f3ebe2;
+		    }
+            #login-page {
+                position: absolute;
+                top: 20%;
+                width: 350px;
+                margin-top: auto;
+                margin-bottom: auto;
+                background: white;
+                justify-content: center;
+                flex-direction: column;
+                padding: 10px;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                border-radius: 5px;
+            }
+
+            .navbar-custom {
+                background-color: #930A00;
+                z-index: 9999;
+            }
+            .navbar-toggler {
+                border-color: #f3ebe2;
+            }
+            /* Setting the stroke to green using rgb values (0, 128, 0) */
+            
+            .navbar-toggler .navbar-toggler-icon {
+                background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(243,230,226, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+            }
+
+            .button-submit {
+                border: none;
+                color: white;
+                border-radius: 5px;
+                padding: 8px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                transition-duration: 0.4s;
+                cursor: pointer;
+            }
+
+            .button-submit1 {
+                background-color: white; 
+                color: black; 
+                border: 2px solid #930A00;
+            }
+
+            .button-submit1:hover {
+                background-color: #930A00;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-custom navbar-expand-lg">
+            
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbar"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                <div class="navbar-nav">
+                <a class="nav-item nav-link" href="{{ url_for('views.home_page') }}"><font color="#f3ebe2">&#9665; HOME</font></a>
+                </div>
+            </div>
+            <img src="{{ url_for('static', filename='logo-project.png') }}" style="width: 7%; height: auto;">
+            
+        </nav>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                {% if category == 'error' %}
+                <div class="alert alert-danger alter-dismissable fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% else %}
+                <div class="alert alert-success alter-dismissable fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %} 
+            {% endfor %} 
+        {% endif %} 
+        {% endwith %}
+        <div class="container h-100" id="form-wrapper" style="padding-top: 3%;">
+            <div class="d-flex justify-content-center h-100">
+                <div class="user_card">
+                    <div class="d-flex justify-content-center form_container">
+                        <form method="POST" id="signup-page">
+                            <h3 align="center">ลงทะเบียน / Sign Up</h3>
+                            <p style="text-align: center;">**กรุณากรอกข้อมูลตามความเป็นจริง เพื่อประโยชน์ในการใช้งาน**</p>
+                            <div class="form-group">
+                                <label for="NameTH">ชื่อ-นามสกุล (ภาษาไทย)</label>
+                                <input type="text" class="form-control" id="NameTH" name="NameTH" placeholder="Enter your name">
+                            </div>
+                            <div class="form-group">
+                                <label for="NameEN">ชื่อ-นามสกุล (ภาษาอังกฤษ)</label>
+                                <input type="text" class="form-control" id="NameEN" name="NameEN" placeholder="Enter your name">
+                            </div>
+                            <div class="form-group">
+                                <label for="studentid">รหัสนักศึกษา *กรอกได้แค่ครั้งเดียวเท่านั้น*</label>
+                                <input type="text" class="form-control" id="studentid" name="studentid" placeholder="Student ID 10 digits">
+                            </div>
+                            <div class="form-group">
+                                <label for="genderchoose">เพศ</label>&emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <select name="genderchoose" id="genderchoose" style="padding: 5px 70px; border-radius: 10px; border-color: #930A00; border-width: 3px;" required>
+                                    <option value="" disabled selected>Choose your gender</option>
+                                    <option value="M">ชาย</option>
+                                    <option value="F">หญิง</option>
+                                    <option value="O">อื่นๆ</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="programchoose">หลักสูตร</label>&emsp;
+                                <select name="programchoose" id="programchoose" style="padding: 5px 30px; border-radius: 10px; border-color: #930A00; border-width: 3px;" required>
+                                    <option value="" disabled selected>*กรอกได้แค่ครั้งเดียวเท่านั้น*</option>
+                                    <option value="DSI">Data Science and Innovation</option>
+                                    <option value="PPE">Philosophy, Politics and Economics</option>
+                                    <option value="SI">Interdisciplinary Studies of Social Science</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="phonenumber">เบอร์โทรศัพท์</label>
+                                <input type="text" class="form-control" id="phonenumber" name="phonenumber" placeholder="">
+                            </div>
+        
+                            <div class="d-flex justify-content-center mt-3 login_container">
+                                <button type="submit" class="button-submit button-submit1">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <script
+            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+        ></script>
+    
+        <script
+            type="text/javascript"
+            src="{{ url_for('static', filename='index.js') }}"
+        ></script>
+    </body>
+</html>

@@ -1,0 +1,40 @@
+{% extends "base_de.html" %} {% block title %}CCS | Deputy Dean - Edit Info{% endblock %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="leftcolumn" style="background-color: #c0c0c0;">
+            
+        </div>
+        <div class="rightcolumn">
+            <div class="card card1" style="padding-left: 10px; padding-top: 10px; padding-right: 10px;">
+                <h3 style="margin: 4px 6px; padding-bottom: 9px;"><b>แก้ไขข้อมูลส่วนตัว</b></h3>
+                <form method="POST">
+                    <p>**กรุณากรอกข้อมูลตามความเป็นจริง เพื่อประโยชน์ในการใช้งาน**</p>
+                    <div class="form-group">
+                        <label for="NameTH">ชื่อ-นามสกุล (ภาษาไทย)</label>
+                        <input type="text" class="form-control" id="NameTH" name="NameTH" placeholder="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="NameEN">ชื่อ-นามสกุล (ภาษาอังกฤษ)</label>
+                        <input type="text" class="form-control" id="NameEN" name="NameEN" placeholder="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="genderchoose">เพศ</label>&emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <select name="genderchoose" id="genderchoose" style="padding: 5px 70px; border-radius: 10px; border-color: #930A00; border-width: 3px;" required>
+                            <option value="" disabled selected>Choose your gender</option>
+                            <option value="M">ชาย</option>
+                            <option value="F">หญิง</option>
+                            <option value="O">อื่นๆ</option>
+                        </select>
+                    </div>
+
+                    <button class="button button-edit">ยืนยัน</button>
+                </form>
+                <br />
+            </div>
+            <br />
+        </div> 
+    </div>
+</div>
+{% endblock %}

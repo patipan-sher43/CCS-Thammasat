@@ -1,0 +1,74 @@
+{% extends "base_em.html" %} {% block title %}CCS | Student Data{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="leftcolumn" style="margin-top: 0.5cm; margin-bottom: 0.5cm;">
+            <form action="#">
+                <div class="form-group">
+                    <label for="name">ชื่อ-นามสกุล</label>
+                    <input type="name" class="form-control" id="name" name="name" placeholder="" value="None">
+                </div>
+                
+                <div class="form-group">
+                    <label for="year-study">ชั้นปี</label>
+                    <select name="year-study" id="year-study" style="padding: 5px; border-radius: 10px; border-color: #930A00; border-width: 3px;">
+                        <option value="None">ไม่กำหนด</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="gender">เพศ</label>
+                    <select name="gender" id="gender" style="padding: 5px; border-radius: 10px; border-color: #930A00; border-width: 3px;">
+                        <option value="None">ไม่กำหนด</option>
+                        <option value="M">ชาย</option>
+                        <option value="F">หญิง</option>
+                        <option value="O">อื่นๆ</option>
+                    </select>
+                </div>
+                <center><button class="button button1">ค้นหา</button></center>
+            </form>
+        </div>
+        <div class="rightcolumn">
+            <div class="card card1">
+                <h3 style="margin: 4px 6px; padding-bottom: 9px;"><b>ข้อมูลนักศึกษา</b></h3>
+                <p style="margin: 4px 6px;">จำนวนนักศึกษาในหลักสูตร (ที่อยู่ในฐานข้อมูลของระบบ) {{ student|length }} คน</p>
+
+                {% if student != [] %}
+                <table style="text-align: center;" id="academic-table">
+                    <tr>
+                        <th>ลำดับที่</th>
+                        <th>รหัสนักศึกษา</th>
+                        <th>ชื่อ - นามสกุล</th>
+                        <th>เพศ</th>
+                        <th>ชั้นปี</th>
+                    </tr>
+                    {%for num in range(student|length) %}
+                    <tr>
+                        <td style="background-color: #545452; color: white;">{{ num+1 }}</td>
+                        <td>{{ student[num]['student_id'] }}</td>
+                        <td>{{ student[num]['student_nameTH'] }}</td>
+                        {% if student[num]['gender'] == 'M' %}
+                        <td>ชาย</td>
+                        {% elif student[num]['gender'] == 'F' %}
+                        <td>หญิง</td>
+                        {% else %}
+                        <td>อื่นๆ</td>
+                        {% endif %}
+                        <td>{{ minus_year - student[num]['start_year'] + 1 }}</td>
+                    </tr>
+                    {% endfor %}
+                </table> <br />
+                {% else %}
+                <h4 style="margin: 8px 10px;">No result found!!</h4>
+                {% endif %}
+                
+            </div>
+            <br />
+        </div> 
+    </div>
+</div>
+{% endblock %}

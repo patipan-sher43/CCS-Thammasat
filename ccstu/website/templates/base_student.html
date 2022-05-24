@@ -1,0 +1,222 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+            crossorigin="anonymous"
+        />
+        <link href='https://fonts.googleapis.com/css?family=Kanit' rel='stylesheet'>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/dropdowns/">
+        <link rel="icon" href="{{ url_for('static', filename='logo-project-icon.png') }}" type="image/x-icon">
+
+        <title>{% block title %}Home{% endblock %}</title>
+        <style>
+            body {
+                margin: 0;
+                padding-top: 4%;
+                height: 100%;
+                font-family: 'Kanit';
+                background-color: #f3ebe2;
+		    }
+            #login-page {
+                position: absolute;
+                top: 30%;
+            }
+            #signup-page {
+                position: absolute;
+                top: 10%;
+            }
+            .navbar {
+                position: fixed;
+                top: 0;
+                width: 100%;
+                z-index: 9999;
+            }
+            .navbar-custom {
+                background-color: #930A00;
+            }
+            .navbar-toggler {
+                border-color: #f3ebe2;
+            }
+            /* Setting the stroke to green using rgb values (0, 128, 0) */
+            
+            .navbar-toggler .navbar-toggler-icon {
+                background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(243,230,226, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+            }
+            .leftcolumn {
+                float: left;
+                width: 30%;
+            }
+            /* Right column */
+            .rightcolumn {
+                float: left;
+                width: 70%;
+                padding-right: 2%;
+                padding-top: 2%;
+                padding-left: 5px;
+            }
+            .button {
+                border: none;
+                color: white;
+                border-radius: 5px;
+                padding: 8px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                transition-duration: 0.4s;
+                cursor: pointer;
+            }
+
+            .button1 {
+                background-color: white; 
+                color: black; 
+                border: 2px solid #930A00;
+            }
+
+            .button1:hover {
+                background-color: #930A00;
+                color: white;
+            }
+
+            .button-new {
+                border: none;
+                color: white;
+                border-radius: 5px;
+                padding: 8px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: flex;
+                font-size: 16px;
+                transition-duration: 0.4s;
+                cursor: pointer;
+            }
+
+            .button-search {
+                background-color: white; 
+                color: black; 
+                border: 2px solid #930A00;
+            }
+
+            .button-search:hover {
+                background-color: #930A00;
+                color: white;
+            }
+
+            .button-edit {
+                background-color: white; 
+                color: black; 
+                border: 2px solid #930A00;
+            }
+
+            .button-edit:hover {
+                background-color: #930A00;
+                color: white;
+            }
+            
+            #academic-table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+            
+            #academic-table td, #academic-table th {
+                border: 2px solid #ffffff;
+                padding: 8px;
+            }
+
+            #academic-table th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: center;
+                background-color: #930A00;
+                color: white;
+            }
+
+            #academic-table td {
+                text-align: center;
+                background-color: #c0c0c0;
+            }
+            .navbar-collapse .navbar-nav > a:hover, .navbar-collapse .navbar-nav > a:focus {
+                color: #fec05f; 
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-custom navbar-expand-lg">
+            
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbar"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                <div class="navbar-nav">
+                <a class="nav-item nav-link" id="logout" href="{{ url_for('auth.logout') }}"><font color="white">LOGOUT</font></a>
+                <a class="nav-item nav-link" id="home" href="{{ url_for('views.student') }}"><font color="white">ข้อมูลส่วนตัว</font></a>
+                <a class="nav-item nav-link" id="curriculum" href="{{ url_for('views.curriculum_page') }}"><font color="white">ข้อมูลการลงทะเบียน</font></a>
+                <a class="nav-item nav-link" id="test-curriculum" href="{{ url_for('views.student_test_regis') }}"><font color="white">ทดลองลงทะเบียนรายวิชา</font></a>
+                </div>
+            </div>
+            <img src="{{ url_for('static', filename='logo-project.png') }}" style="width: 7%; height: auto;">
+            
+        </nav>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                {% if category == 'error' %}
+                <div class="alert alert-danger alter-dismissable fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% else %}
+                <div class="alert alert-success alter-dismissable fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %} 
+            {% endfor %} 
+        {% endif %} 
+        {% endwith %}
+    
+        <div class="container">{% block content %} {% endblock %}</div>
+        <script
+            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+        ></script>
+    
+        <script
+            type="text/javascript"
+            src="{{ url_for('static', filename='index.js') }}"
+        ></script>
+    </body>
+</html>

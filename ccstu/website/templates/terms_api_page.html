@@ -1,0 +1,344 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+            crossorigin="anonymous"
+        />
+        <link href='https://fonts.googleapis.com/css?family=Kanit' rel='stylesheet'>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/dropdowns/">
+        <link rel="icon" href="{{ url_for('static', filename='logo-project-icon.png') }}" type="image/x-icon">
+
+        <title>{% block title %}CCS | API Terms{% endblock %}</title>
+        <style>
+            body {
+                margin: 0;
+                padding-top: 4%;
+                max-width:100%;
+                height: 100%;
+                font-family: 'Kanit';
+                background-color: #f3ebe2;
+		    }
+            #login-page {
+                position: absolute;
+                top: 30%;
+            }
+            #signup-page {
+                position: absolute;
+                top: 10%;
+            }
+            .navbar {
+                position: fixed;
+                top: 0;
+                width: 100%;
+                z-index: 9999;
+            }
+            .navbar-custom {
+                background-color: #930A00;
+            }
+            .navbar-custom #navbar .nav-item:hover {
+                color: rgb(255, 217, 0);
+            }
+            .navbar-toggler {
+                border-color: #f3ebe2;
+            }
+            /* Setting the stroke to green using rgb values (0, 128, 0) */
+            
+            .navbar-toggler .navbar-toggler-icon {
+                background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(243,230,226, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+            }
+            .leftcolumn {
+                float: left;
+                width: 30%;
+            }
+            /* Right column */
+            .rightcolumn {
+                float: left;
+                width: 70%;
+                padding-right: 2%;
+                padding-top: 2%;
+                padding-left: 5px;
+            }
+            .button {
+                border: none;
+                color: white;
+                border-radius: 5px;
+                padding: 8px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                transition-duration: 0.4s;
+                cursor: pointer;
+            }
+
+            .button1 {
+                background-color: white; 
+                color: black; 
+                border: 2px solid #930A00;
+            }
+
+            .button1:hover {
+                background-color: #930A00;
+                color: white;
+            }
+
+            .button-new {
+                border: none;
+                color: white;
+                border-radius: 5px;
+                padding: 8px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: flex;
+                font-size: 16px;
+                transition-duration: 0.4s;
+                cursor: pointer;
+            }
+
+            .button-search {
+                background-color: white; 
+                color: black; 
+                border: 2px solid #930A00;
+            }
+
+            .button-search:hover {
+                background-color: #930A00;
+                color: white;
+            }
+
+            .button-edit {
+                background-color: white; 
+                color: black; 
+                border: 2px solid #930A00;
+            }
+
+            .button-edit:hover {
+                background-color: #930A00;
+                color: white;
+            }
+            
+            #academic-table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+            
+            #academic-table td, #academic-table th {
+                border: 2px solid #ffffff;
+                padding: 8px;
+            }
+
+            #academic-table th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: center;
+                background-color: #930A00;
+                color: white;
+            }
+
+            #academic-table td {
+                text-align: center;
+                background-color: #c0c0c0;
+            }
+            .container {
+                display: flex;
+                align-items: center;
+            }
+            .user_card {
+                width: 100%;
+                margin-top: auto;
+                margin-bottom: auto;
+                background: white;
+                position: relative;
+                justify-content: center;
+                flex-direction: column;
+                padding: 10px;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                border-radius: 5px;
+		    }
+
+            .form_container {
+                margin-top: 20px;
+            }
+            .scroll {
+                display: block;
+                border: 3px solid #930A00;
+                padding: 5px;
+                margin-top: 5px;
+                width: 100%;
+                height: 300px;
+                overflow-y: scroll;
+            }
+            .button-submit {
+                border: none;
+                color: white;
+                border-radius: 5px;
+                padding: 8px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                transition-duration: 0.4s;
+                cursor: pointer;
+            }
+            .button-submit1 {
+                background-color: white; 
+                color: black; 
+                border: 2px solid #930A00;
+            }
+
+            .button-submit1:hover {
+                background-color: #930A00;
+                color: white;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-custom navbar-expand-lg">
+            
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbar"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" href="{{ url_for('views.home_page') }}"><font color="#f3ebe2">&#9665; HOME</font></a>
+                </div>
+            </div>
+            <img src="{{ url_for('static', filename='logo-project.png') }}" style="width: 7%; height: auto;">
+            
+        </nav>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                {% if category == 'error' %}
+                <div class="alert alert-danger alter-dismissable fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% else %}
+                <div class="alert alert-success alter-dismissable fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %} 
+            {% endfor %} 
+        {% endif %} 
+        {% endwith %}
+    
+        <div class="container" style="padding-top: 5%;">
+            <div class="container h-100" id="form-wrapper">
+                <div class="d-flex justify-content-center h-100">
+                    <div class="user_card">
+                        <div class="d-flex justify-content-center form_container">
+                            <form method="POST">
+                                <h3><center>ข้อตกลงการอนุญาตใช้งาน API</center></h3>
+                                <div class="scroll">
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;ข้อตกลงการอนุญาต API นี้ (ซึ่งต่อไปนี้เรียกว่า "ข้อตกลง") กำหนดสิทธิ์การเข้าถึงของผู้ใช้งาน (ซึ่งต่อไปนี้เรียกว่า "ผู้รับอนุญาต") สำหรับ API ข้อมูล และเอกสารประกอบที่จัดหาให้และให้อนุญาตโดย CCS Thammasat การใช้ API ของ CCS Thammasat จะถือว่าผู้ใช้งานอยู่ภายใต้ข้อผูกมัดในการปฏิบัติตามเงื่อนไขของข้อตกลงนี้ หากผู้ใช้งานไม่ยินยอมต่อเงื่อนไขของข้อตกลงนี้ จะไม่สามารถใช้ API ได้</p>
+                                    <ol>
+                                        <li><b>ข้อกำหนดทั่วไป</b></li>
+                                        <ul>
+                                            <li>"อินเทอร์เฟซการเขียนโปรแกรมแอปพลิเคชัน" หรือ "API" เป็นชุดของไลบรารี เครื่องมือ ตัวอย่างโค้ดต้นฉบับ ข้อมูลจำเพาะที่เผยแพร่ และเอกสารประกอบที่จัดทำโดย CCS Thammasat ทั้งนี้ CCS Thammasat อาจจัดให้มีการปรับปรุงหรือการเพิ่มเติม API สำหรับผู้รับอนุญาต ภายใต้ดุลยพินิจของตนเอง</li>
+                                        </ul>
+                                        <li><b>การอนุญาต</b></li>
+                                        <ul>
+                                            <li>ภายใต้เงื่อนไขของข้อตกลงฉบับนี้ CCS Thammasat มอบสิทธิ์ที่จำกัด ไม่ใช่สิทธิ์ขาดแต่เพียงผู้เดียว และถ่ายโอนไม่ได้ (ไม่มีสิทธิ์ในการให้สิทธิ์ต่อ) แก่ผู้รับอนุญาตในการใช้ API เพื่อการใช้งานส่วนตัวของผู้รับอนุญาตแต่เพียงประการเดียว</li>
+                                            <li>ผู้รับอนุญาตไม่อาจแจกจ่าย ให้อนุญาต หรือโอนสิทธิ์ API ในทางอื่นใดให้แก่บุคคลภายนอกได้</li>
+                                        </ul>
+                                        <li><b>สิทธิ์และข้อจำกัดอื่นๆ</b></li>
+                                        <ul>
+                                            <li>ผู้รับอนุญาตสามารถคัดลอก API ได้เพื่อการใช้งานภายใต้เงื่อนไขของข้อตกลงฉบับนี้เท่านั้น</li>
+                                            <li>การทำวิศวกรรมย้อนกลับ ผู้รับอนุญาตไม่มีสิทธิ์ในโค้ดต้นฉบับของ API เว้นแต่ผู้รับอนุญาตจะได้รับสิทธิ์โดยชัดแจ้งโดยข้อตกลงฉบับนี้ ผู้รับอนุญาตไม่มีสิทธิ์ในการประมวลผล แยกส่วน ปรับเปลี่ยน หรือถอดการประกอบ API หรือทำให้ API อยู่ในรูปแบบที่ยอมรับโดยทั่วไปของการส่งด้วยวิธีอื่นใด ไม่ว่าทั้งหมดหรือบางส่วน ยกเว้นตามที่ได้รับอนุญาตโดยชัดแจ้งโดยข้อตกลงฉบับนี้หรือกฎหมายที่บังคับใช้</li>
+                                            <li>เพื่อการใช้งาน API ที่มีประสิทธิภาพ อาจจำเป็นต้องใช้เครื่องมือพัฒนาเพิ่มเติมอย่างเช่น คอมไพเลอร์หรือซอฟต์แวร์อื่นๆ (“ซอฟต์แวร์ภายนอก”) ผู้รับอนุญาตมีความรับผิดชอบทั้งหมดในการจัดซื้อซอฟต์แวร์ดังกล่าวและใบอนุญาตที่จำเป็น CCS Thammasat ไม่อยู่ภายใต้พันธกรณีใดๆ และไม่รับประกันเกี่ยวกับการใช้ซอฟต์แวร์ภายนอกของผู้รับอนุญาต</li>
+                                            <li>ผู้รับอนุญาตไม่มีสิทธิ์ในการให้สิทธิ์ต่อสำหรับสิทธิ์ของตนภายใต้ข้อตกลงฉบับนี้ ยกเว้นในกรณีที่ระบุไว้โดยชัดแจ้งในข้อตกลงฉบับนี้ ผู้รับอนุญาตไม่สามารถใช้เครื่องหมายการค้าหรือชื่อทางการค้าของ CCS Thammasat ได้ CCS Thammasat สงวนสิทธิ์ทั้งหมดที่ไม่มอบให้โดยชัดแจ้งในที่นี้</li>
+                                            <li>ผู้รับอนุญาตไม่สามารถขอรับสิทธิบัตรของ APIs หรือแอปพลิเคชั่นที่ถูกพัฒนาโดยใช้ API ของ CCS Thammasat หรือ API ของผู้รับอนุญาตอื่นๆ ของ CCS Thammasat เพื่อสร้าง ใช้หรือขายผลิตภัณฑ์หรือเทคโนโลยีใดๆ</li>
+                                        </ul>
+                                        <li><b>ทรัพย์สิน</b></li>
+                                        <ul>
+                                            <li>CCS Thammasat จะสงวนสิทธิ์ในทรัพย์สิน รวมทั้งสิทธิ์ทั้งหมดที่มีต่อสิทธิบัตร ลิขสิทธิ์ ความลับทางการค้า เครื่องหมายการค้า และสิทธิ์ในทรัพย์สินทางปัญญาอื่นๆ ต่อ API และการเปลี่ยนแปลงใดๆ ที่มีต่อที่กล่าวมา CCS Thammasat มีสิทธิ์พิเศษแต่เพียงผู้เดียวในการจดทะเบียนสิทธิบัตรและลิขสิทธิ์ใดๆ ผู้รับอนุญาตรับทราบว่าภายใต้ข้อตกลงฉบับนี้ ผู้รับอนุญาตไม่มีสิทธิ์ในทรัพย์สินต่อ API โดยมีสิทธิ์ในการใช้งานที่จำกัดภายใต้เงื่อนไขของข้อตกลงฉบับนี้เท่านั้น</li>
+                                        </ul>
+                                        <li><b>การรักษาความลับ</b></li>
+                                        <ul>
+                                            <li>API ประกอบด้วยข้อมูลที่มีค่าเกี่ยวกับเว็บไซต์และความลับทางการค้าที่เป็นของ CCS Thammasat ซึ่งยังคงเป็นทรัพย์สินของ CCS Thammasat ผู้รับอนุญาตจะต้องหลีกเลี่ยงการเปิดเผยข้อมูลดังกล่าวและหลีกเลี่ยงการใช้ API โดยไม่ได้รับอนุญาต</li>
+                                            <li>ผู้รับอนุญาตต้องไม่เปิดเผย โฆษณา หรือเผยแพร่เงื่อนไขของข้อตกลงฉบับนี้ โดยปราศจากคำยินยอมเป็นลายลักษณ์อักษรล่วงหน้าจาก CCS Thammasat การแถลงข่าวหรือการเผยแพร่ใดๆ ที่เกี่ยวข้องกับข้อตกลงฉบับนี้จะต้องได้รับการพิจารณาล่วงหน้าและการอนุมัติเป็นลายลักษณ์อักษรจาก CCS Thammasat</li>
+                                        </ul>
+                                        <li><b>ไม่มีการรับประกัน</b></li>
+                                        <ul>
+                                            <li>API และเอกสารประกอบได้รับการจัดหาให้ "ตามที่เป็น" โดยไม่มีการรับประกันใดๆ ทั้งสิ้น CCS Thammasat ไม่รับประกันว่า API และเอกสารประกอบจะเหมาะสำหรับการใช้งานโดยผู้รับอนุญาต และปราศจากข้อบกพร่องหรือข้อผิดพลาด นอกจากนี้ CCS Thammasat ยังไม่รับประกันการเข้าถึง API และเอกสารประกอบได้อย่างต่อเนื่องและไม่หยุดชะงัก และไม่ทำการรับประกันหรือสำแดงใดๆ เกี่ยวกับผลของการใช้งานดังกล่าว</li>
+                                        </ul>
+                                        <li><b>การจำกัดความรับผิด</b></li>
+                                        <ul>
+                                            <li>ผู้รับอนุญาตรับผิดทั้งหมดสำหรับความเสียหายใดๆ ต่อระบบคอมพิวเตอร์ของตนหรือการสูญเสียข้อมูลอันเป็นผลจากการดาวน์โหลดหรือการใช้ API CCS Thammasat จะไม่รับผิดสำหรับความเสียหายพิเศษ โดยบังเอิญ หรืออันเป็นผลตามมาใดๆ (รวมทั้งแต่ไม่จำกัดเฉพาะการสูญเสียผลกำไร การพักหรือการสิ้นสุดงาน การไม่ทำงานหรือการชำรุดของคอมพิวเตอร์ การสูญเสียข้อมูลหรือความเสียหายอื่นใด รวมทั้งความเสียหายด้านการเงิน อันเกิดจากการใช้หรือความไม่สามารถในการใช้ API หรือการให้หรือการไม่ให้บริการสนับสนุน) แม้ว่า CCS Thammasat จะได้รับแจ้งถึงความเป็นไปได้ที่จะเกิดความเสียหายดังกล่าวแล้วก็ตาม</li>
+                                        </ul>
+                                        <li><b>เงื่อนไขและการสิ้นสุดข้อตกลง</b></li>
+                                        <ul>
+                                            <li>ในกรณีที่ผู้รับอนุญาตไม่ปฏิบัติตามเงื่อนไขข้อใดก็ตามของข้อตกลงฉบับนี้ ผู้รับอนุญาตจะต้องรับผิดต่อ CCS Thammasat สำหรับความสูญเสียหรือความเสียหายใดๆ อันเกิดจากการละเมิดเงื่อนไข</li>
+                                            <li>เมื่อสิ้นสุดข้อตกลงฉบับนี้ ผู้รับอนุญาตจะต้องยุติการใช้ API ลบสำเนาทั้งหมดของ API และเอกสารประกอบ หรือส่งคืนให้แก่ CCS Thammasat โดยทันที</li>
+                                            <li>CCS Thammasat จะต้องมีสิทธิ์ตรวจสอบการปฏิบัติตามเงื่อนไขของข้อตกลงของผู้รับอนุญาต ผู้รับอนุญาตต้องอำนวยความสะดวกให้ดำเนินการดังกล่าวตามการร้องขอจาก CCS Thammasat</li>
+                                        </ul>
+                                        <li><b>เบ็ดเตล็ด</b></li>
+                                        <ul>
+                                            <li>การฝ่าฝืนหรือการไม่ปฏิบัติตามเงื่อนไขของข้อตกลงฉบับนี้จะส่งผลให้สิ้นสุดข้อตกลง</li>
+                                            <li>CCS Thammasat จะต้องมีสิทธิ์ระงับ (หรือสิ้นสุด) สิทธิ์เข้าถึงบริการของผู้รับอนุญาต ภายใต้ดุลยพินิจของตนเองและไม่มีการบอกแจ้ง ในกรณีที่มีการฝ่าฝืนเงื่อนไขของข้อตกลง</li>
+                                        </ul>
+                                    </ol>
+                                    การติดตั้ง การคัดลอกหรือการใช้ API ของ CCS Thammasat ในทางอื่นใด จะถือว่าผู้รับอนุญาตรับทราบว่าตนได้อ่าน เข้าใจ และตกลงตามเงื่อนไขที่ระบุข้างต้นแล้ว
+                                </div><br />
+                                
+                                <input type="checkbox" name="terms" id="terms" value="checked"> ข้าพเจ้ายอมรับเงื่อนไขและข้อตกลงในการใช้บริการข้อมูลผ่าน API ของเว็บไซต์ CCS Thammasat<br />
+                                <div class="d-flex justify-content-center mt-3 login_container">
+                                    <button class="button-submit button-submit1">ยืนยัน</button>
+                                </div>
+                            
+                                  
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script
+            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+        ></script>
+    
+        <script
+            type="text/javascript"
+            src="{{ url_for('static', filename='index.js') }}"
+        ></script>
+    </body>
+</html>

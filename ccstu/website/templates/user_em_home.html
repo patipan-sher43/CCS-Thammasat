@@ -1,0 +1,37 @@
+{% extends "base_em.html" %} {% block title %}Home | ข้อมูลส่วนตัว{% endblock %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="leftcolumn" style="background-color: #c0c0c0;">
+            <center style="padding-top: 20px;"><img src="{{ image }}" style="width: 50%; border-radius: 50%;"></center>
+            <h3 style="padding-top: 10px; padding-left: 10px;"><b>ยินดีต้อนรับ</b><br />คุณ{{ result['nameTH'] }}</h3>
+        </div>
+        <div class="rightcolumn">
+            <div class="card card1" style="padding-left: 10px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px;">
+                <h3 style="margin: 4px 6px; padding-bottom: 9px;"><b>ข้อมูลส่วนตัว</b></h3>
+                <p style="padding-left: 5px;"><b>รหัสประจำตัวเจ้าหน้าที่: {{ result['user_id'] }}</b></p>
+                <p style="padding-left: 5px;"><b>ชื่อ: {{ result['nameTH'] }}</b></p>
+                <p style="padding-left: 5px;"><b>ชื่อ (อังกฤษ): {{ result['nameEN'] }}</b></p>
+                <p style="padding-left: 5px;"><b>เพศ: {{ gender }}</b></p>
+                {% if result['program_id'] == 'DSI' %}
+                <p style="padding-left: 5px;"><b>หลักสูตร: วิทยาศาสตรบัณฑิต สาขาวิชาวิทยาศาสตร์และนวัตกรรมข้อมูล</b></p>
+                {% elif result['program_id'] == 'PPE' %}
+                <p style="padding-left: 5px;"><b>หลักสูตร: ศิลปศาสตรบัณฑิต สาขาวิชาปรัชญา การเมือง และเศรษฐศาสตร์</b></p>
+                {% elif result['program_id'] == 'SI' %}
+                <p style="padding-left: 5px;"><b>หลักสูตร: ศิลปศาสตร์บัณฑิต สาขาวิชาสหวิทยาการสังคมศาสตร์</b></p>
+                {% endif %}
+                <p style="padding-left: 5px;"><b>ตำแหน่ง: {{ result['role'] }}</b></p>
+                <p style="padding-left: 5px;"><b>อีเมล: {{ result['email'] }}</b></p>
+                <br />
+                <form action="{{ url_for('views.user_em_edit') }}">
+                    <button class="button button-edit">แก้ไข</button>
+                </form>
+                
+            </div>
+            <br />
+        </div> 
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base_de.html" %} {% block title %}CCS | Overall{% endblock %}
+
+{% block content %}
+<h3 align="center" style="padding-top: 20px;">แสดงภาพรวมของ</h3>
+<div class="form-group">
+  <center>
+  <form method="POST">
+    <select name="overall-choose" id="overall" style="padding: 5px; border-radius: 10px; border-color: #930A00; border-width: 3px;">
+        <option value="overall1">นักศึกษาที่จะเรียนจบการศึกษา</option>
+        <option value="overall2">นักศึกษาในแต่ละหลักสูตร</option>
+        <option value="overall3">นักศึกษาที่มีปัญหาการลงทะเบียนเรียน</option>
+    </select>
+    <button class="button-new button-search" style="margin-top: 10px;">ค้นหา</button>
+  </form><br />
+  {% if text_r is not none %}
+    {{ text_r }}
+  {% endif %}
+</center>
+</div>
+{% endblock %}

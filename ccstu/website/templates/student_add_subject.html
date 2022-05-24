@@ -1,0 +1,162 @@
+{% extends "base_student.html" %} {% block title %}CCS | Add Curriculum{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="leftcolumn" style="margin-top: 0.5cm; margin-bottom: 0.5cm;">
+            <h4 style="padding-top: 20px;">ขั้นตอนการเพิ่ม / แก้ไขรายวิชาที่เคยลงทะเบียน</h4>
+            <p style="margin-right: 0.5cm;">ในการเพิ่ม / แก้ไขรายวิชาในภาคการศึกษาที่เคยลงทะเบียน ขอให้นักศึกษาทำตามขั้นตอนดังต่อไปนี้ เพื่อการเช็ครายวิชาที่แม่นยำ</p>
+            <ol style="margin-right: 0.5cm;">
+                <li>เลือกภาคการศึกษาที่ต้องการเพิ่ม / แก้ไขรายวิชา</li>
+                <li>ใส่รายวิชาที่ต้องการ ตามจำนวนรายวิชาที่จะเพิ่ม / แก้ไขในภาคการศึกษานั้น (ในกรณีที่มีมากกว่า 1 วิชา ให้พิมพ์แทนคำว่า None ได้เลย)</li>
+                <li>กดปุ่ม "ยืนยัน" เพื่อยืนยันการกรอกข้อมูล</li>
+            </ol>
+            <p style="color:red;"><b>ก่อนทำการยืนยันทุกครั้ง โปรดตรวจสอบรายวิชาและกลุ่มเรียนให้มีความถูกต้อง เพื่อความรวดเร็วในการเพิ่มข้อมูล</b></p>
+            <form action="{{ url_for('views.curriculum_page') }}">
+                <button class="button-new button-search">กลับสู่หน้าข้อมูลการลงทะเบียน</button>
+            </form>
+            
+        </div>
+        <div class="rightcolumn" style="vertical-align: center;">
+            <div class="card card1">
+
+                <form action="" method="POST" id="CheckCurriculum" style="padding-left: 10px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px;">
+                    <h5 style="background-color: #AF8788; color: #f3ebe2; height: auto; padding-top: 10px; padding-left: 5px;">เลือกภาคการศึกษาที่ต้องการเพิ่มรายวิชา</h5>
+                    <div class="form-group" style="padding-top: 10px;">
+                        
+                        <select class="form-select" name="academic-year" id="acdm" style="padding: 5px 80px; border-radius: 10px; border-color: #930A00; border-width: 3px;"  required>
+                            <option value="" disabled selected>เลือกภาคการศึกษา</option>
+                            <optgroup label="ชั้นปีที่ 1">
+                                <option value="11/{{ start_year }}">1/{{ start_year }}</option>
+                                <option value="12/{{ start_year }}">2/{{ start_year }}</option>
+                                <option value="13/{{ start_year }}">3/{{ start_year }}</option>
+                            </optgroup>
+                            <optgroup label="ชั้นปีที่ 2">
+                                <option value="21/{{ start_year+1 }}">1/{{ start_year+1 }}</option>
+                                <option value="22/{{ start_year+1 }}">2/{{ start_year+1 }}</option>
+                                <option value="23/{{ start_year+1 }}">3/{{ start_year+1 }}</option>
+                            </optgroup>
+                            <optgroup label="ชั้นปีที่ 3">
+                                <option value="31/{{ start_year+2 }}">1/{{ start_year+2 }}</option>
+                                <option value="32/{{ start_year+2 }}">2/{{ start_year+2 }}</option>
+                                <option value="33/{{ start_year+2 }}">3/{{ start_year+2 }}</option>
+                            </optgroup>
+                            <optgroup label="ชั้นปีที่ 4">
+                                <option value="41/{{ start_year+3 }}">1/{{ start_year+3 }}</option>
+                                <option value="42/{{ start_year+3 }}">2/{{ start_year+3 }}</option>
+                            </optgroup>
+                        </select>
+                        {% if program == 'DSI' %}
+                        <h6 style="padding-top: 10px; padding-left: 5px; padding-bottom: 5px;">ในกรณีที่ต้องการเพิ่มรายวิชาในภาคเรียนที่ 1/{{ start_year+3 }} โปรดระบุหมวดวิชาจาก 5 หมวดในตัวเลือกนี้</h6>
+                        <select class="form-select" name="module" id="acdm" style="padding: 5px 30px; border-radius: 10px; border-color: #930A00; border-width: 3px;"  required>
+                            <option value="None">ไม่มี</option>
+                            <option value="3">การวิเคราะห์เชิงลึกด้านประกันภัย (Actuarial Analytics)</option>
+                            <option value="4">ปัญญาประดิษฐ์ (Artificial Intelligence)</option>
+                            <option value="5">การตรวจพิสูจน์พยานหลักฐานทางดิจิทัล (Digital Forensic)</option>
+                            <option value="6">เทคโนโลยีการแปรรูปทางดิจิทัล (Digital Transformation Technology)</option>
+                            <option value="7">เทคโนโลยีด้านสุขภาพ (Health Informatics)</option>
+                        </select>
+                        {% endif %}
+                    </div>
+
+                    <h5 style="background-color: #AF8788; color: #f3ebe2; height: auto; padding-top: 10px; padding-left: 5px;">กรอกรายวิชาที่เคยลงทะเบียนในภาคการศึกษานั้น</h5>
+                    <div class="form-group" style="padding-top: 10px;">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="leftcolumn1" style="float: left; width: 50%; margin-bottom: 0.5cm; padding-right: 5px; padding-left: 5px;">
+                                    <table>
+                                        <tr>
+                                            <td>วิชาที่ 1</td>
+                                            <td>กลุ่มเรียน</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="text" class="form-control" id="s1" name="s1" placeholder="กรอกรหัสวิชาที่ 1"></td>
+                                            <td><input type="text" class="form-control" id="c1" name="c1" placeholder="กรอกกลุ่มเรียน"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>วิชาที่ 2</td>
+                                            <td>กลุ่มเรียน</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="text" class="form-control" id="s2" name="s2" placeholder="กรอกรหัสวิชาที่ 2" value="None"></td>
+                                            <td><input type="text" class="form-control" id="c2" name="c2" placeholder="กรอกกลุ่มเรียน" value="None"></td> 
+                                        </tr>
+                                        <tr>
+                                            <td>วิชาที่ 3</td>
+                                            <td>กลุ่มเรียน</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="text" class="form-control" id="s3" name="s3" placeholder="กรอกรหัสวิชาที่ 3" value="None"></td>
+                                            <td><input type="text" class="form-control" id="c3" name="c3" placeholder="กรอกกลุ่มเรียน" value="None"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>วิชาที่ 4</td>
+                                            <td>กลุ่มเรียน</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="text" class="form-control" id="s4" name="s4" placeholder="กรอกรหัสวิชาที่ 4" value="None"></td>
+                                            <td><input type="text" class="form-control" id="c4" name="c4" placeholder="กรอกกลุ่มเรียน" value="None"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>วิชาที่ 5</td>
+                                            <td>กลุ่มเรียน</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="text" class="form-control" id="s5" name="s5" placeholder="กรอกรหัสวิชาที่ 5" value="None"></td>
+                                            <td><input type="text" class="form-control" id="c5" name="c5" placeholder="กรอกกลุ่มเรียน" value="None"></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="rightcolumn1" style="float: left; width: 50%; margin-bottom: 0.5cm; padding-left: 5px; padding-right: 5px;">
+                                    <table>
+                                        <tr>
+                                            <td>วิชาที่ 6</td>
+                                            <td>กลุ่มเรียน</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="text" class="form-control" id="s6" name="s6" placeholder="กรอกรหัสวิชาที่ 6" value="None"></td>
+                                            <td><input type="text" class="form-control" id="c6" name="c6" placeholder="กรอกกลุ่มเรียน" value="None"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>วิชาที่ 7</td>
+                                            <td>กลุ่มเรียน</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="text" class="form-control" id="s7" name="s7" placeholder="กรอกรหัสวิชาที่ 7" value="None"></td>
+                                            <td><input type="text" class="form-control" id="c7" name="c7" placeholder="กรอกกลุ่มเรียน" value="None"></td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td>วิชาที่ 8</td>
+                                            <td>กลุ่มเรียน</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="text" class="form-control" id="s8" name="s8" placeholder="กรอกรหัสวิชาที่ 8" value="None"></td>
+                                            <td><input type="text" class="form-control" id="c8" name="c8" placeholder="กรอกกลุ่มเรียน" value="None"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>วิชาที่ 9</td>
+                                            <td>กลุ่มเรียน</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="text" class="form-control" id="s9" name="s9" placeholder="กรอกรหัสวิชาที่ 9" value="None"></td>
+                                            <td><input type="text" class="form-control" id="c9" name="c9" placeholder="กรอกกลุ่มเรียน" value="None"></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="button-new button-search">ยืนยัน</button>
+                </form>
+            </div>
+            
+            </div>
+        <br />
+        </div> 
+    </div>
+</div>
+
+
+{% endblock %}
